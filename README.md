@@ -19,3 +19,4 @@
         arr2 := map[string]int{"a":1,"b":2}       
        
     ```
+ 2. 提交一次带emoji的注释
