@@ -19,4 +19,8 @@ func main() {
 
 	book := Books{"Go 语言", "www.baidu.com", "haha", 1}
 	fmt.Println(book.title)
+
+	book1 := book
+	book1.title = "php"
+	fmt.Print(book1.title, book.title)
 }

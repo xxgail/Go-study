@@ -10,10 +10,12 @@ type Phone interface {
 }
 
 type NokiaPhone struct {
+	name string
 }
 
 func (np NokiaPhone) call() {
-	fmt.Println("I am Nokia")
+	np.name = "Nokia"
+	fmt.Println("I am " + np.name)
 }
 
 type IPhone struct {
@@ -24,11 +26,12 @@ func (ip IPhone) call() {
 }
 
 func main() {
-	var phone Phone
+	//var phone Phone
 
-	phone = new(NokiaPhone)
+	//phone = new(NokiaPhone)
+	phone := new(NokiaPhone)
 	phone.call()
 
-	phone = new(IPhone)
-	phone.call()
+	//phone = new(IPhone)
+	//phone.call()
 }

@@ -26,3 +26,11 @@ func (c Circle) getArea() float64 {
 	// c.radius 即为Circle类型对象中的属性
 	return 3.14 * c.radius * c.radius
 }
+
+type FangXing struct {
+	a float64
+}
+
+func (f FangXing) getArea() float64 {
+	return f.a * f.a
+}
