@@ -31,3 +31,31 @@
     数组中 {} 中的元素个数不能大于 [] 中的数字。
     
  2. :mute: 不想学指针所以先跳过。
+ 
+ 3. 关于切片的容量问题。
+    切片在添加（append）的时候，长度直接增加，但是容量只能翻倍。增加过程中一旦容量不够，直接翻倍。
+    ```Go
+    func main() {    
+        var numbers []int
+        printSlice(numbers)
+        // len=0,cap=0 
+    
+        /* 允许追加空切片 */
+        numbers = append(numbers, 0)
+        printSlice(numbers)
+        // len=1,cap=1
+     
+        /* 向切片添加一个元素 */
+        numbers = append(numbers, 1)
+        printSlice(numbers)
+        // len=2,cap=2 (1*2)
+     
+        /* 同时添加多个元素 */
+        numbers = append(numbers, 2,3,4)
+        printSlice(numbers)
+        // len=5,cap=6 (2*3)
+    
+        numbers = append(numbers, 5,6,7,8)
+        // len=9,cap=12 (6*2)
+    }
+    ```
