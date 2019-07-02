@@ -26,12 +26,11 @@ func (ip IPhone) call() {
 }
 
 func main() {
-	//var phone Phone
+	var phone Phone
 
-	//phone = new(NokiaPhone)
-	phone := new(NokiaPhone)
+	phone = NokiaPhone{"aa"}
 	phone.call()
 
-	//phone = new(IPhone)
-	//phone.call()
+	phone = new(IPhone)
+	phone.call()
 }

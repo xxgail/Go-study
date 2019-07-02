@@ -75,13 +75,14 @@ func main() {
 
 	//fmt.Println(factorial(5))
 
-	val, err := Sqrt(-1)
+	//val, err := Sqrt(-1)
+	//
+	//if err != nil {
+	//	fmt.Println(err)
+	//} else {
+	//	fmt.Println(val)
+	//}
 
-	if err != nil {
-		fmt.Println(err)
-	} else {
-		fmt.Println(val)
-	}
 }
 
 /**
@@ -107,6 +108,17 @@ func fibonacci(n int) int {
 		return n
 	}
 	return fibonacci(n-2) + fibonacci(n-1)
+}
+
+/**
+一个斐波那契数列的生成器
+*/
+func fib() func() int {
+	a, b := 0, 1
+	return func() int {
+		a, b = b, a+b
+		return a
+	}
 }
 
 /**
