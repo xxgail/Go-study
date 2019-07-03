@@ -28,9 +28,14 @@ func (ip IPhone) call() {
 func main() {
 	var phone Phone
 
-	phone = NokiaPhone{"aa"}
+	phone = &NokiaPhone{"aa"}
+	describe(phone)
 	phone.call()
 
 	phone = new(IPhone)
 	phone.call()
+}
+
+func describe(i Phone) {
+	fmt.Printf("(%v, %T)\n", i, i)
 }

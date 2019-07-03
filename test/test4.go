@@ -7,6 +7,7 @@ import (
 	"strings"
 )
 
+// 定义类型。定义funcType为一个 “没有参数，返回值为int类型的函数”
 type funcType func() int
 
 func fib() funcType {
