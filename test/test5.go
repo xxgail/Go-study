@@ -10,7 +10,7 @@ type Vertex struct {
 /**
 这是个方法
 */
-func (v *Vertex) Scale(f float64) {
+func (v Vertex) Scale(f float64) {
 	v.X = v.X * f
 	v.Y = v.Y * f
 }
@@ -42,4 +42,6 @@ func main() {
 使用指针接收者的原因有二：
 首先，方法能够修改其接收者指向的值。
 其次，这样可以避免在每次调用方法时复制该值。若值的类型为大型结构体时，这样做会更加高效。
+
+指针会改变原变量的值
 */

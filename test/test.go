@@ -22,6 +22,8 @@ func main() {
 }
 
 // 该 method 属于 Circle 类型对象中的方法
+// 方法就是一类带特殊的 接收者 参数的函数。
+// 方法接收者在它自己的参数列表内，位于 func 关键字和方法名之间。
 func (c Circle) getArea() float64 {
 	// c.radius 即为Circle类型对象中的属性
 	return 3.14 * c.radius * c.radius
