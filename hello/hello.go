@@ -1,8 +1,8 @@
 package main
 
 import (
+	"Go-study/stringutil"
 	"fmt"
-	"github.com/xxgail/stringutil"
 )
 
 func main() {
