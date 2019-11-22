@@ -2,12 +2,21 @@ package main
 
 import (
 	"fmt"
+	"github.com/xxgail/alg/AdvantageCount"
 	"sort"
 )
 
 func main() {
-	data := heightChecker([]int{1, 1, 4, 2, 1, 3})
-	fmt.Println(data)
+	a := []int{2, 0, 4, 1, 2}
+	b := []int{1, 3, 0, 0, 2}
+	ad := AdvantageCount.AdvantangeCount(a, b)
+	fmt.Print(ad)
+	//eq := EightQueue.EightQueue{
+	//	Column: make([]int, 8),
+	//}
+	//eq.CalEightQueues(0)
+	//data := heightChecker([]int{1, 1, 4, 2, 1, 3})
+	//fmt.Println(data)
 
 	//data := constructArray(7,2)
 	//fmt.Println(data)
