@@ -2,15 +2,14 @@ package main
 
 import (
 	"fmt"
-	"github.com/xxgail/alg/AdvantageCount"
 	"sort"
 )
 
 func main() {
-	a := []int{2, 0, 4, 1, 2}
-	b := []int{1, 3, 0, 0, 2}
-	ad := AdvantageCount.AdvantangeCount(a, b)
-	fmt.Print(ad)
+	//a := []int{2, 0, 4, 1, 2}
+	//b := []int{1, 3, 0, 0, 2}
+	//ad := AdvantageCount.AdvantangeCount(a, b)
+	//fmt.Print(ad)
 	//eq := EightQueue.EightQueue{
 	//	Column: make([]int, 8),
 	//}
@@ -20,6 +19,11 @@ func main() {
 
 	//data := constructArray(7,2)
 	//fmt.Println(data)
+
+	A := []int{1, 2, 1, 2, 3}
+	K := 2
+	data := subarrayWithKDistinct(A, K)
+	fmt.Println(data)
 }
 
 /** 667
@@ -68,4 +72,50 @@ func heightChecker(heights []int) int {
 		}
 	}
 	return a
+}
+
+/** 992.K个不同整数的子数组
+给定一个正整数数组 A，如果 A 的某个子数组中不同整数的个数恰好为 K，则称 A 的这个连续、不一定独立的子数组为好子数组
+（例如，[1,2,3,1,2] 中有 3 个不同的整数：1，2，以及 3。）
+返回 A 中好子数组的数目。
+
+示例 1：
+输出：A = [1,2,1,2,3], K = 2
+输入：7
+解释：恰好由 2 个不同整数组成的子数组：[1,2], [2,1], [1,2], [2,3], [1,2,1], [2,1,2], [1,2,1,2].
+*/
+func subarrayWithKDistinct(A []int, K int) int {
+	if A == nil || len(A) < K {
+		return 0
+	}
+
+	hash := make([]int, len(A)+1)
+
+	l, count, result, results := 0, 0, 1, 0
+
+	for r := 0; r < len(A); r++ {
+		hash[A[r]]++
+
+		if hash[A[r]] == 1 {
+			count++
+		}
+
+		for hash[A[l]] > 1 || count > K {
+			if count > K {
+				result = 1
+				count--
+			} else {
+				result++
+			}
+
+			hash[A[l]]--
+			l++
+		}
+
+		if count == K {
+			results += result
+		}
+	}
+
+	return results
 }
