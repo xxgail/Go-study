@@ -87,13 +87,31 @@
     - 方法接收者在它自己的参数列表内，位于 func 关键字和方法名之间。
     - 方法只是个带接收者参数的函数。  
     - 只能为在同一包内定义的类型的接收者声明方法，而不能为其它包内定义的类型（包括 int 之类的内建类型）的接收者声明方法。就是接收者的类型定义和方法声明必须在同一包内；不能为内建类型声明方法。
-        
-        
+ 
+ 10. 类型转换
+ 
+    ```go
+    // string到int
+    int,err:=strconv.Atoi(string)
+    // string到int64
+    int64, err := strconv.ParseInt(string, 10, 64)
+    // int到string
+    string:=strconv.Itoa(int)
+    // int64到string
+    string:=strconv.FormatInt(int64,10)
+    // map 转 json
+    m :=map[string]string{"type":"10","msg":"hello."}
+    mjson,_ :=json.Marshal(m)
+    mString :=string(mjson)
+    fmt.Printf("print mString:%s",mString)
+    ```
+ 
  ## 3.Go中比较好玩的一些命令
  1. go env 查看go的配置信息（GOPATH等信息
  2. go build 运行main主程序，查看输出结果
  3. go install 生成一个.exe文件，作为可操作的命令
  4. go test 测试写好的包，返回OK。
+ [dsd](http://baidu.com)
  
  ## 4.Go vendor
  1. 安装：
