@@ -1,5 +1,6 @@
 ## 跟PHP的比较
  - :robot: 神奇的网站[php=>golang](https://www.php2golang.com/)
+ 
  1. PHP中的数组，在Go中分为两种
     ```
     //php
