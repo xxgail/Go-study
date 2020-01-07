@@ -1,6 +1,13 @@
 redis:
   addr: "127.0.0.1:6379"
   password: ""
-  DB: 10
+  DB: 0
   poolSize: 30
   minIdleConns: 30
+
+mysql:
+  host: "127.0.0.1"
+  port: "3306"
+  database: "test"
+  username: "root"
+  password: "root"

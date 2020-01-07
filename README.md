@@ -10,7 +10,7 @@
  - [Concurrency](./Concurrency) 并发-测试代码
  - [config](./config) 配置
  - [hello](./hello) 初期学习生成的exe文件-测试代码
- - [RedisData](./RedisData) 学习redis的链接-测试代码
+ - [RedisData](sql) 学习redis的链接-测试代码
  - [stringutil](./stringutil) 练习生成的包-测试代码
  - [test](./test) 学习结构体等-测试代码
 

@@ -1,135 +1,127 @@
 package main
 
 import (
-	"errors"
 	"fmt"
-	"math"
+	"github.com/spf13/viper"
+	"github.com/techoner/gophp/serialize"
+	"github.com/xxgail/sql/mysqlconn"
+	"github.com/xxgail/sql/redisconn"
+	"time"
 )
 
 func main() {
+	initConfig()
 
-	// 命名
-	var a = "Hello"
-	b := "Gail"
-	var c string
-	c = "!"
-	fmt.Println(a, b, c)
+	initRedis()
 
-	// 变量一般用驼峰命名，但是要注意跟函数名区分开
-	roundArea := RoundArea(1.0)
-	fmt.Print(roundArea)
+	initMysql()
+	redisClient := redisconn.GetClient()
+	var bidUserId int64 = 12
+	var bidPrice int64 = 1000
+	bidLog := make(map[string]interface{})
+	bidLog["bid_user_id"] = bidUserId
+	bidLog["bid_price"] = bidPrice
+	bidLog["bid_before"] = 12222
+	bidLog["bid_after"] = 11222
+	bidLog["bid_time"] = time.Now().Format("2006-01-02 15:04:05")
+	bidLog["step"] = 100
 
-	// 普通的for循环
-	sum := 0
-	for i := 0; i < 10; i++ {
-		sum += 1
+	//bidLog["last_user_id"] = lastUserId
+	//bidLog["last_mar_before"] = lastUserMarBefore
+	//bidLog["last_mar_after"] = lastUserMarAfter
+	//bidLog["last_com_before"] = lastUserComBefore
+	//bidLog["last_com_after"] = lastUserComAfter
+	//
+	//bidLog["invite_user_id"] = lastInviteUserId
+	//bidLog["invite_before"] = lastInviteRewBefore
+	//bidLog["invite_after"] = lastInviteRewAfter
+
+	info, _ := serialize.Marshal(bidLog)
+	redisClient.RPush("aa", info)
+	//userIds,err := redisClient.SMembers("MBUser:UserDBUpdate:362104ec9caf13ade9754ccc918a3229").Result()
+	////fmt.Println(val , val,reflect.TypeOf(val))
+	//
+	////userIds, err := redisClient.SMembers(keyUserDB).Result()
+	//if err != nil {
+	//	fmt.Println("获取需要更新的用户信息失败",err)
+	//}
+	//if len(userIds) == 0 {
+	//	fmt.Println("没有需要更新的用户信息")
+	//}else{
+	//	for _,v := range userIds{
+	//		fmt.Println("----- 当前更新的用户ID为 ",v)
+	//		userId,_ := strconv.Atoi(v)
+	//		//user := mbuser.InitUser(userId,false)
+	//		//userInfo := user.GetUserInfo()
+	//
+	//		//开启事务
+	//		tx, err := mysqlconn.GetMysqlConn().Begin()
+	//		if err != nil{
+	//			fmt.Println("tx fail")
+	//		}
+	//		//准备sql语句
+	//		stmt, err := tx.Prepare("UPDATE users SET balance = ?, income = ?, bid_count = ? WHERE id = ?")
+	//		if err != nil{
+	//			fmt.Println("Prepare fail")
+	//		}
+	//		//设置参数以及执行sql语句
+	//		res, err := stmt.Exec(1001,1000, 10, userId)
+	//		if err != nil{
+	//			fmt.Println("Exec fail")
+	//		}
+	//		//提交事务
+	//		tx.Commit()
+	//		fmt.Println(res.RowsAffected())
+	//	}
+	//}
+
+	//----- 插入bid_log
+	val, _ := redisClient.LPop("aa").Result()
+	log, _ := serialize.UnMarshal([]byte(val))
+	bidLog1 := log.(map[string]interface{})
+	tx, err := mysqlconn.GetMysqlConn().Begin()
+	queryBid := "INSERT INTO auction_bid_log (`auction_id`,`user_id`,`bid`,`commission`,`group_id`,`created_at`,`updated_at`,`margin`) VALUES (?,?,?,?,?,?,?,?)"
+	stemBid, err := tx.Prepare(queryBid)
+	if err != nil {
+		fmt.Println("Prepare fail")
 	}
-	fmt.Print(sum)
-
-	// Go 中的普通数组。初始化数组中 {} 中的元素个数不能大于 [] 中的数字。
-	arr1 := [3]int{1, 2, 3}
-	arrr1 := [...]int{1, 2, 5}
-	fmt.Print(arr1, arrr1)
-	// 类似于PHP中的foreach循环
-	for _, v := range arr1 {
-		fmt.Println(v)
-	}
-	arr11 := [2][2]int{{0, 0}, {1, 1}}
-	fmt.Print(arr11)
-
-	// map是Go中的集合，类似于PHP中有key值的数组，类似于js中的对象
-	map1 := map[string]int{"a": 1, "b": 2}
-	// 用range循环集合或者数组，类似于PHP中的foreach
-	for k, v := range map1 {
-		fmt.Printf("the key is %v and the value is %v \n", k, v)
-	}
-	val, ok := map1["a"]
-	// 查找是否含有"a"这个键，若有则OK返回true，val返回值。没有返回false，和值类型的默认值（值为int型，返回0
-	fmt.Print(ok, val)
-
-	// 删除map中的键值对，传key就行
-	delete(map1, "a")
-
-	// 还可以这样写函数，类似于PHP中的匿名函数,赋值给一个变量
-	getSquareRoot := func(x float64) float64 {
-		return math.Sqrt(x)
-	}
-	fmt.Println(getSquareRoot(9))
-
-	// 数组的长度不可改变，但是切片可以。
-	slice := []int{1, 2, 3} // 创建且赋值，可以省略长度
-	//var slice1 = make([]int, 2) // 仅创建（
-	// 用make创建 make([]T, length, capacity)：T指类型、length初始长度、capacity容量
-	arr_slice := [5]int{1, 2, 3, 4, 5} // 数组
-	s := arr_slice[1:4]                // 切片（可省略前后
-	fmt.Println(slice, s)
-	// len()计算切片的长度、cap()计算切片的容量
-	// 此处的cap为4，即从1开始往后有四个位置
-	fmt.Printf("len=%d cap=%d slice=%v\n", len(s), cap(s), s)
-	// 一个切片在未初始化之前默认为 nil，长度为 0
-
-	var i int
-	for i = 0; i < 10; i++ {
-		fmt.Printf("%d\t", fibonacci(i))
+	resBid, err := stemBid.Exec(1, bidLog1["bid_user_id"], bidLog1["bid_price"], 110, 1, "2020-01-02 14:22:22", 1578385660, 1)
+	if err != nil {
+		fmt.Println("Exec fail")
 	}
 
-	fmt.Println(factorial(5))
+	queryBid1 := "INSERT INTO auction_bid_log (`auction_id`,`user_id`,`bid`,`commission`,`group_id`,`created_at`,`updated_at`,`margin`) VALUES (?,?,?,?,?,?,?,?)"
+	stemBid1, err := tx.Prepare(queryBid1)
+	if err != nil {
+		fmt.Println("Prepare fail")
+	}
+	resBid1, err := stemBid1.Exec(21, 21, 100, 110, 1, "2020-01-02 14:22:22", 1578385660, 1)
+	if err != nil {
+		fmt.Println("Exec fail")
+	}
 
+	//将事务提交
+	tx.Commit()
+	fmt.Println(resBid.LastInsertId())
+	fmt.Println(resBid1.LastInsertId())
 }
 
-/**
- 求一个圆的面积。
-PS: 关于函数名的命名规范
-1. 使用驼峰命名
-2. 如果包外不需要访问请用小写开头的函数
-3. 如果需要暴露出去给包外访问需要使用大写开头的函数名称
-*/
-func RoundArea(r float32) float32 {
-	const Pi = 3.14 // 常量
-
-	area := r * r * Pi
-
-	return area
+// 初始化redis配置，启动redis
+func initRedis() {
+	redisconn.InitNewClient()
 }
 
-/**
-用递归来实现斐波那契数列
-*/
-func fibonacci(n int) int {
-	if n < 2 {
-		return n
-	}
-	return fibonacci(n-2) + fibonacci(n-1)
+// 初始化MySQL配置，启动MySQL
+func initMysql() {
+	mysqlconn.InitDB()
 }
 
-/**
-一个斐波那契数列的生成器
-函数名称为fib，没有参数，有返回值，返回值类型为函数类型，该返回值函数的返回值为int型
-*/
-func fib() func() int {
-	a, b := 0, 1
-	return func() int {
-		a, b = b, a+b
-		return a
-	}
-}
+func initConfig() {
+	viper.SetConfigName("config/sql")
+	viper.AddConfigPath(".")
 
-/**
-用递归来实现阶乘
-*/
-func factorial(n int) int {
-	if n > 0 {
-		return n * factorial(n-1)
+	err := viper.ReadInConfig()
+	if err != nil {
+		panic(fmt.Errorf("Fatal error config file: %s \n", err))
 	}
-	return 1
-}
-
-/*
- 返回错误error
-*/
-func Sqrt(f float64) (float64, error) {
-	if f < 0 {
-		return 0, errors.New("math: square root of negative number")
-	}
-	return math.Sqrt(f), errors.New("")
 }
