@@ -3,6 +3,7 @@
 ~~最近公司的项目里用到了go去查询同步MySQL，所以记录一下，其实大部分是原生SQL，但是强类型肯定有坑~~
 
 #### 0. 连接MySQL
+- 获取sql包 `go get -u github.com/go-sql-driver/mysql`
 - 具体的连接方式可以参考[mysqllib.go](../sql/mysqlconn/mysqllib.go)
 - 注意import引入的包`import _ "github.com/go-sql-driver/mysql"`
 
