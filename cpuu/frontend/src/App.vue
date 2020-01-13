@@ -1,18 +1,17 @@
 <template>
   <div id="app">
-    <img alt="Wails logo" src="./assets/images/logo.png" class="logo zoomIn">
-    <HelloWorld/>
+    <CPUUsage/>
   </div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+import CPUUsage from './components/CPUUsage.vue';
 import "./assets/css/main.css";
 
 export default {
   name: "app",
   components: {
-    HelloWorld
+    CPUUsage
   }
 };
 </script>
