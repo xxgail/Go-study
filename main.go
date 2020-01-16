@@ -8,11 +8,14 @@ import (
 )
 
 func main() {
-	initConfig()
-
-	initRedis()
-
-	initMysql()
+	a := 5
+	//b := 100
+	fmt.Println(float64(a) * 0.01)
+	//initConfig()
+	//
+	//initRedis()
+	//
+	//initMysql()
 }
 
 // 初始化redis配置，启动redis

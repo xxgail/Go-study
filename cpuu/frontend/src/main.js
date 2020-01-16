@@ -11,7 +11,7 @@ Vue.config.devtools = true;
 import Bridge from "./wailsbridge";
 
 Bridge.Start(() => {
-	new Vue({
-		render: h => h(App)
-	}).$mount("#app");
+  new Vue({
+    render: h => h(App)
+  }).$mount("#app");
 });

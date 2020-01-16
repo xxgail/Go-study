@@ -6,18 +6,18 @@
     export default {
         data() {
             return {
-                series: [0],
+                series: [10],
                 options: {
-                    labels: ['CPU Usage']
+                    labels: ['CPU']
                 }
             };
         },
-        mounted: function() {
-            wails.events.on("cpu_usage", cpu_usage => {
-                if (cpu_usage) {
-                    this.series = [ cpu_usage.avg ];
-                }
-            });
-        }
+        // mounted: function() {
+        //     wails.events.on("cpu_usage", cpu_usage => {
+        //         if (cpu_usage) {
+        //             this.series = [ cpu_usage.average ];
+        //         }
+        //     });
+        // }
     };
 </script>

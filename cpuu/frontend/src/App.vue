@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import CPUUsage from './components/CPUUsage.vue';
+import CPUUsage from "./components/CPUUsage";
 import "./assets/css/main.css";
 
 export default {

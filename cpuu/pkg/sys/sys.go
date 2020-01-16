@@ -1,6 +1,7 @@
 package sys
 
 import (
+	"fmt"
 	"github.com/shirou/gopsutil/cpu"
 	"github.com/wailsapp/wails"
 	"math"
@@ -12,7 +13,7 @@ type Stats struct {
 }
 
 type CPUUsage struct {
-	Average int `json:"avg"`
+	Average int `json:"average"`
 }
 
 func (s *Stats) WailsInit(runtime *wails.Runtime) error {
@@ -34,6 +35,7 @@ func (s *Stats) GetCPUUsage() *CPUUsage {
 		return nil
 	}
 
+	fmt.Println(percent)
 	return &CPUUsage{
 		Average: int(math.Round(percent[0])),
 	}

@@ -7,16 +7,15 @@ import (
 )
 
 func main() {
-
 	js := mewn.String("./frontend/dist/app.js")
 	css := mewn.String("./frontend/dist/app.css")
 
 	stats := &sys.Stats{}
 
 	app := wails.CreateApp(&wails.AppConfig{
-		Width:  512,
-		Height: 374,
-		Title:  "cpu",
+		Width:  400,
+		Height: 400,
+		Title:  "CPU",
 		JS:     js,
 		CSS:    css,
 		Colour: "#131313",
