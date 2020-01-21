@@ -38,3 +38,20 @@
 - **SINTER** `sinter(key1,key2)` 返回一个集合的全部成员，该集合是所有给定集合的交集。
 - **SINTERSTORE** `sinterstore(destination,key1,key2)` 此命令等同于SINTER，但它将结果保存到destination集合，而不是简单地返回结果集。如果destination集合已经存在，则将其覆盖。 destination可以是key本身。
 - **SUNION** `sunion(key1,key2)` 返回一个集合的全部成员，该集合是所有给定集合的并集。
+
+
+#### 3. List(集合)
+- **LPUSH** `lpush(key,value)` 将一个或多个值value插入到列表key的表头。
+- **LPUSHX** `lpush(key,value)` 将值value插入到列表key的表头，当且仅当key存在并且是一个列表。
+- **RPUSH** `rpush(key,value)` 将一个或多个值value插入到列表key的**表尾**。
+- **RPUSHX** `rpush(key,value)` 将值value插入到列表key的表尾，当且仅当key存在并且是一个列表。。
+- **LPOP** `lpop(key)` 移除并返回列表key的头元素。
+- **RPOP** `rpop(key)` 移除并返回列表key的尾元素。
+- **LLEN** `llen(key)` 返回列表key的长度，如果key不存在返回0。
+- **LRANGE** `lrange(key,start,stop)` 返回列表key中指定区间内的元素，区间以偏移量start和stop指定。
+- **LREM** `lrem(key,count,value)` 根据参数count的值，移除列表中与参数value相等的元素。
+          count的值可以是以下几种：
+          count > 0: 从表头开始向表尾搜索，移除与value相等的元素，数量为count。
+          count < 0: 从表尾开始向表头搜索，移除与value相等的元素，数量为count的绝对值。
+          count = 0: 移除表中所有与value相等的值。。
+- **LSET** `lset(key,index,value)` 将列表key下标为index的元素的值甚至为value。

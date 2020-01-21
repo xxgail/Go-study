@@ -5,17 +5,20 @@ import (
 	"github.com/spf13/viper"
 	"github.com/xxgail/sql/mysqlconn"
 	"github.com/xxgail/sql/redisconn"
+	"github.com/xxgail/task"
 )
 
 func main() {
-	a := 5
-	//b := 100
-	fmt.Println(float64(a) * 0.01)
-	//initConfig()
-	//
-	//initRedis()
-	//
-	//initMysql()
+	initConfig()
+
+	initRedis()
+
+	initMysql()
+
+	fmt.Println("----------------------------------------------------------------")
+	//redisClient := redisconn.GetClient()
+
+	task.Init()
 }
 
 // 初始化redis配置，启动redis
