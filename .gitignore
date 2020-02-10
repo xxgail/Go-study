@@ -3,3 +3,12 @@
 /vendor/golang.org/
 /vendor/gopkg.in/
 .vscode/.easyRedis.redis
+go.mod
+/cpuu/go.mod
+/cpuu/package-lock.json
+/cpuu/frontend/package.json
+/cpuu/frontend/package.json.md5
+/cpuu/frontend/package-lock.json
+/cpuu/go.mod
+/cpuu/go.sum
+/cpuu/package-lock.json

@@ -11,7 +11,8 @@
     "core-js": "^2.6.4",
     "vue": "^2.5.22",
     "@wailsapp/runtime": "^1.0.0",
-    "vue-apexcharts": "latest"
+    "vue-apexcharts": "latest",
+    "apexcharts": "latest"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.4.0",

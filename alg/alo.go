@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/xxgail/alg/DecodeString"
 	"sort"
 )
 
@@ -20,10 +21,14 @@ func main() {
 	//data := constructArray(7,2)
 	//fmt.Println(data)
 
-	A := []int{1, 2, 1, 2, 3}
-	K := 2
-	data := subarrayWithKDistinct(A, K)
+	//A := []int{1, 2, 1, 2, 3}
+	//K := 2
+	//data := subarrayWithKDistinct(A, K)
+	//fmt.Println(data)
+	s := "3[a2[c]]"
+	data := DecodeString.DecodeString(s)
 	fmt.Println(data)
+	fmt.Println(s)
 }
 
 /** 667
