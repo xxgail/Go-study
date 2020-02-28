@@ -12,3 +12,6 @@ go.mod
 /cpuu/go.mod
 /cpuu/go.sum
 /cpuu/package-lock.json
+cpuu/cpuu
+cpuu/node_modules/
+go.sum
