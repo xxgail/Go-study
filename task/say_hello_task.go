@@ -7,7 +7,7 @@ import (
 )
 
 func Init() {
-	Timer(3*time.Second, 30*time.Second, SayHello, "", nil, nil)
+	Timer(3*time.Second, 3*time.Second, SayHello, "", nil, nil)
 }
 
 func SayHello(param interface{}) (result bool) {
@@ -19,7 +19,7 @@ func SayHello(param interface{}) (result bool) {
 		}
 	}()
 
-	fmt.Println("hello,小盖。❤️")
+	fmt.Println("hello,小盖")
 
 	return
 }

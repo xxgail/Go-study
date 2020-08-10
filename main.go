@@ -1,32 +1,25 @@
 package main
 
 import (
-	"crypto/md5"
-	"encoding/hex"
 	"fmt"
 	"github.com/spf13/viper"
-	"github.com/xxgail/sql/mysqlconn"
-	"github.com/xxgail/sql/redisconn"
-	"strconv"
+	"xxgail/sql/mysqlconn"
+	"xxgail/sql/redisconn"
 )
 
 func main() {
-	//initConfig()
+	initConfig()
+
 	//
 	//initRedis()
 	//
 	//initMysql()
 
 	fmt.Println("----------------------------------------------------------------")
-	var i int = 0
-	num := strconv.Itoa(i)
-	u := md5.New()
-	u.Write([]byte("UserDBUpdate" + num))
-	res := hex.EncodeToString(u.Sum(nil))
-	u1 := md5.New()
-	u1.Write([]byte("UserDBUpdate0"))
-	res1 := hex.EncodeToString(u1.Sum(nil))
-	fmt.Println(num, res, res1)
+
+	//router := gin.Default()
+	//routers.Init(router)
+
 	//task.Init()
 }
 

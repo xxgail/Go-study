@@ -18,6 +18,7 @@ func Timer(delay, tick time.Duration, fun TimerFunc, param interface{}, funcDefe
 			return
 		}
 
+		// time包实现的定时器
 		t := time.NewTimer(delay)
 		defer t.Stop()
 

@@ -1,0 +1,22 @@
+syntax = "proto3";
+package proto;
+
+message Student{
+  string name = 1;
+  bool male = 2;
+  repeated int32 scores = 3;
+}
+
+
+service SearchService {
+  rpc Search (SearchRequest) returns (SearchResponse);
+}
+
+message SearchRequest {
+  string s = 1;
+}
+
+message SearchResponse {
+  string s = 1;
+  string res = 22;
+}
